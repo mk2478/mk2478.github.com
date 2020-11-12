@@ -19,7 +19,7 @@ disqus_shortname: #disqus shortname
 
 user:
   name: Aakaori
-  pic: /assets/img/.jpg
+  pic: /assets/img/Aaa.jpg
   picAlt: "Aakaori"
   job: Student.
   aboutme: true # comment this out if you don't need the 'about' page.
