@@ -1,5 +1,5 @@
 ---
-title: Test
+title: Sample Post
 categories: [Sample]
 comments: true
 ---
