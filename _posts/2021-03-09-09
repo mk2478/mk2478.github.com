@@ -1,0 +1,118 @@
+---
+title: 21년 3월 9일 코딩일기
+categories: [Python]
+comments: true
+---
+
+## 21년 3월 9일 코딩일기
+
+[화이트 해커를 위한 암호와 해킹](http://digital.kyobobook.co.kr/digital/ebook/ebookDetail.ink?LINK=NVE&category=001&barcode=4808956746975)
+미리 말한다. 오늘은 내용이 길 예정.
+먼저 책을 보다가 든 생각인데, 전에 했던 카이사르 암호에
+alphabet 이라는 리스트 없이 chr를 쓰면 될 것 같아서 곧바로 수정해보았다.
+```python
+class Caesar:  
+    def __init__(self):  
+        pass  
+ def makeencdisk(self,key):  
+        self.encdisk = {}  
+        for f in range(26):  
+            self.encdisk[chr(f+65)] = chr((f+key)%26+65)  
+    def makedecdisk(self,key):  
+        self.decdisk = {}  
+        for f in range(26):  
+            self.decdisk[chr((f+key)%26+65)] = chr(f+65)  
+    def Encrypt(self,word,key):  
+        self.makeencdisk(key)  
+        text = ''  
+  for f in word:  
+            text = text + self.encdisk[f]  
+        return text  
+    def Decrypt(self,word,key):  
+        self.makedecdisk(key)  
+        text = ''  
+  for f in word:  
+            text = text + self.decdisk[f]  
+        return text
+```
+우선 결과는 성공. 제대로 암호화 복호화까지 되는걸 확인했다.
+그 다음에 나온건 아핀 암호.
+
+아핀 암호의 수식은 이렇다.
+**enc(i) = (k1*i+k2) mod 26**
+여기서 k1 은 26과 서로소이고, k2는 0~25이다.
+k1이 될 수 있는건 1,3,5,7,9,11,15,17,19,21,23,25 라는 거다.
+
+이걸 만드는건 그렇게 어렵지 않았다.
+카이사르 암호에 쓰이는 코드를 약간 수정하니 답이 나오더라.
+
+> 만들고나니 쉬운걸 막상 하려니 멍청하게도 30분이나 써버렸다. 에휴... 이 빡대갈아.
+
+```python
+class Afine :  
+    def __init__(self):  
+        pass  
+ def makeencdisk(self,k1,k2):  
+        self.encdisk = {}  
+        for f in range(26):  
+            self.encdisk[chr(f+65)] = chr(((f*k1%26)+k2)%26+65)  
+    def makedecdisk(self,k1,k2):  
+        self.decdisk = {}  
+        for f in range(26):  
+            self.decdisk[chr(((f*k1%26)+k2)%26+65)] = chr(f+65)  
+    def Encrypt(self,word,k1,k2):  
+        self.makeencdisk(k1,k2)  
+        text = ''  
+  for f in word:  
+            text = text + self.encdisk[f]  
+        return text  
+    def Decrypt(self,word,k1,k2):  
+        self.makedecdisk(k1,k2)  
+        text = ''  
+  for f in word:  
+            text = text + self.decdisk[f]  
+        return text
+```
+이렇게 만들고보니 막상 이런 생각이 들었다.
+
+> '이런 식이면 두 암호를 합쳐서 더 어렵게 할 수 있지 않을까?'
+
+궁금한건 해봐야 직성이 풀리는 성격. (내 몇 안되는 자랑거리중 하나다.)
+한번 해봤다.
+막상 해보니까 별거 아니더라.
+
+```python
+class Cafine:  
+    def __init__(self):  
+        pass  
+ def makeencdisk(self,k1,k2,k3):  
+        self.encdisk = {}  
+        for f in range(26):  
+            self.encdisk[chr(f+65)] = chr((((f*k1%26)+k2)+k3)%26+65)  
+    def makedecdisk(self,k1,k2,k3):  
+        self.decdisk = {}  
+        for f in range(26):  
+            self.decdisk[chr((((f*k1%26)+k2)+k3)%26+65)] = chr(f+65)  
+    def Encrypt(self,word,k1,k2,k3):  
+        self.makeencdisk(k1,k2,k3)  
+        text = ''  
+  for f in word:  
+            text = text + self.encdisk[f]  
+        return text  
+    def Decrypt(self,word,k1,k2,k3):  
+        self.makedecdisk(k1,k2,k3)  
+        text = ''  
+  for f in word:  
+            text = text + self.decdisk[f]  
+        return text
+```
+클래스 이름은 Caesar + Afine 을 합쳐서 Cafine으로 만들었다.
+지금 사실 밤 12시 50분이라서 졸려서그런지 머리가 잘 안돌아가서 이게 제대로 된건지 확실히는 모르겠다.
+그래도 암호화랑 복호화가 제대로 되니까 뭐 맞겠지.
+
+아..... 쓰러질거같다... 자야겠다...
+
+
+
+언제나 그랬듯, 피드백은 항상 환영이니 댓글로 남겨주길 바랍니다.
+감사합니다 :)
