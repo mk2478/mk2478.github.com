@@ -1,0 +1,66 @@
+---
+title: 21년 3월 10일 코딩일기
+categories: [Python]
+comments: true
+---
+
+## 21년 3월 10일 코딩일기
+
+[화이트 해커를 위한 암호와 해킹](http://digital.kyobobook.co.kr/digital/ebook/ebookDetail.ink?LINK=NVE&category=001&barcode=4808956746975)
+
+오늘은 우선 시작부터 내 기준 반쯤 실패다.
+도저히 모르겠어서....
+
+```python
+class tool:  
+    def __init__(self):  
+        pass  
+ def make_encdic(self,key):  
+        self.index = {}  
+        self.order = []  
+        for f in range(len(key)):  
+            self.index[key[f]] = f  
+            self.order.append(key[f])  
+        self.order.sort()  
+        print  
+  def make_decdic(self,key):  
+        self.index = {}  
+        self.order = {}  
+        numbering = []  
+        for f in range(len(key)):  
+            numbering.append(key[f])  
+            self.order[f] = key[f]  
+        numbering.sort()  
+        for f in range(len(key)):  
+            self.index[numbering[f]] = f  
+    def Encrypt(self,key,word):  
+        result = ""  
+  self.make_encdic(key)  
+        for f in range(len(key)):  
+            for v in range(len(word)//len(key)):  
+                result = result + word[self.index[self.order[f]]+(len(key)*v)]  
+        return result  
+    def Decrpyt(self,key,word):  
+        result = ""  
+  self.make_decdic(key)  
+        for v in range(len(word) // len(key)):  
+            for f in range(len(key)):  
+                result = result + word[(len(key)-1)*self.index[self.order[f]]+v]  
+        return result  
+word = "ABCDEFGHIJKLMNOPQRST"  
+a = tool()  
+b = a.Encrypt("BRAIN",word)  
+print(b)  
+b = a.Decrpyt("BRAIN",b)  
+print(b)
+```
+
+주상 전치 암호용 암호화,복호화 툴을만들었는데
+저 BRAIN 이라는 key와 저장돼있는 word외엔 구동이 안된다.....
+더이상 더 하려다간 멘탈이 와장창될거같아서 이건 이쯤까지.....
+능력자분이 계시면 제발 도와주세요
+이거 진짜 모르겠어요
+
+그리고 대칭키 암호의 정의에 대해 나왔는데,
+XOR연산이 뭔지 몰라서 살짝 헤멨었다.
+내일 확실히 보고 좀더 머릿속으로 익혀서 와야할거같다.
