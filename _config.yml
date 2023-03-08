@@ -21,7 +21,7 @@ user:
   name: Hyang_Dian
   pic: /assets/img/hyang_gif.gif
   picAlt: "hyang_dian"
-  job: Biginner Programer.
+  job: Biginner Programmer.
   aboutme: true # comment this out if you don't need the 'about' page.
 
 exclude:
